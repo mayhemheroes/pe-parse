@@ -1,5 +1,7 @@
 project: pe-parse
 target: fuzz-parse
+testsuite:
+    - file://mayhem/testsuite
 
 cmds:
   - cmd: /fuzz_pe
