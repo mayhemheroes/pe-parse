@@ -1,0 +1,7 @@
+project: pe-parse
+target: fuzz-parse
+
+cmds:
+  - cmd: /fuzz_lib
+    libfuzzer: true
+    max_length: 125000
