@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 project(pe-parse)
 
+option(PEPARSE_ENABLE_FUZZER "Enable building fuzzer" OFF)
+if (PEPARSE_ENABLE_FUZZER)
+  add_compile_options(-fsanitize=address,undefined,fuzzer-no-link)
+  add_link_options(-fsanitize=address,undefined)
+endif()
+
 # NOTE(ww): CMake has bad defaults for install prefixes.
 # Instead of fussing over them, install everything to the build directory by default
 # and let the user set CMAKE_INSTALL_PREFIX explicitly for their own needs.
@@ -74,4 +80,10 @@ option(PEPARSE_ENABLE_TESTING "Enable building tests" OFF)
 if (PEPARSE_ENABLE_TESTING)
   enable_testing()
   add_subdirectory(tests)
+endif()
+
+option(PEPARSE_ENABLE_FUZZER "Enable building fuzzer" OFF)
+if (PEPARSE_ENABLE_FUZZER)
+  message(STATUS "Building fuzzer")
+  add_subdirectory(mayhem)
 endif()

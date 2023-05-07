@@ -1,0 +1,9 @@
+project: pe-parse
+target: fuzz-parse
+testsuite:
+    - file://mayhem/testsuite
+
+cmds:
+  - cmd: /fuzz_pe
+    libfuzzer: true
+    max_length: 125000
